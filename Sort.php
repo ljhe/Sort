@@ -14,7 +14,7 @@ class Sort
     }
 
     /**
-     * 冒泡算法
+     * 冒泡排序
      * 1.比较相邻的元素。如果第一个比第二个大，就交换它们两个;
      * 2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数;
      * 3.针对所有的元素重复以上的步骤，除了最后一个;
@@ -27,7 +27,7 @@ class Sort
         $length = count($tmp);
         // 两两比较一共需要比较 $length-1 次
         for ($i = 0; $i < $length - 1; $i++){
-            // 每一次的比较需要 $length - 1 ，然后减去之前已经比较好，排好序的数字
+            // 每一次的比较需要 $length-1，然后减去之前已经比较好，排好序的数字(放在末尾的最大的数字)
             for ($j = 0; $j < $length - 1 - $i; $j++){
                 if ($tmp[$j] > $tmp[$j+1]) {
                     $change = $tmp[$j];
@@ -35,6 +35,33 @@ class Sort
                     $tmp[$j+1] = $change;
                 }
             }
+        }
+        return $tmp;
+    }
+
+    /**
+     * 选择排序
+     * 1.首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置;
+     * 2.再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾;
+     * 3.重复步骤1~2，直到排序完成。
+     * @param $tmp
+     * @return mixed
+     */
+    public function selectSort($tmp)
+    {
+        $length = count($tmp);
+        for ($i = 0; $i < $length - 1; $i++){
+            // 留存值最小的索引
+            $minIndex = $i;
+            // 拍好序之后从第一个开始依次存放。所以，每次循环 j 的开始值也依次增加。然后需要从剩余部分一一比较
+            for ($j = $i + 1; $j < $length; $j++){
+                if ($tmp[$j] < $tmp[$minIndex]) {
+                    $minIndex =  $j;
+                }
+            }
+            $change = $tmp[$minIndex];
+            $tmp[$minIndex] = $tmp[$i];
+            $tmp[$i] = $change;
         }
         return $tmp;
     }
