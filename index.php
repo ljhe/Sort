@@ -13,5 +13,5 @@ for ($i=0;$i<10;$i++){
 }
 echo '生成的10位随机数是：' . var_export($tmp,true) . '<br>';
 $sort = new Sort();
-$result = $sort->selectSort($tmp);
+$result = $sort->insertSort($tmp);
 echo '排序后10位随机数是：' . var_export($result,true) . '<br>';
